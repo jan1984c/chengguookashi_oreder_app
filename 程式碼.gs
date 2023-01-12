@@ -31,7 +31,7 @@ function couponcheck(coupon_number){
 
     var check = couponlist.indexOf(coupon_number);
 
-  // return "OK";
+return "OK";
 }
 
 function include(filename){
