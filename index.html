@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <?!= include("index-css"); ?>
+  </head>
+  <body>
+   <!-- ----------------禮盒資料-------------- --> 
+    <!-- ----------------春櫻-------------- --> 
+
+    <div class="container">
+      <div id="name_1"><h2 >春櫻禮盒</h2></div>
+      <div class="row">
+        <div class="flow-text col s3" id="pri_1">價格 <?!= price[0]; ?></div>  
+          <div class="input-field col s6">
+            <select id="qun_1">
+              <?!= quantity; ?>
+            </select>
+            <label>數量</label>
+          </div>
+          <a class="btn-floating btn-large waves-effect waves-light red" id="btn_1"><i class="material-icons">add</i></a>   
+        </div>
+      </div> 
+    </div>
+ <!-- ----------------楓紅-------------- -->
+    <div class="container">
+      <h2>楓紅禮盒</h2>
+      <div class="row">
+        <div class="flow-text col s3">價格 <?!= price[1]; ?></div>  
+        <div class="input-field col s6">
+          <select>
+            <?!= quantity; ?>
+          </select>
+          <label>數量</label>
+        </div>
+        <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>   
+      </div>
+    </div> 
+<!-- ----------------貓族-------------- -->
+    <div class="container">
+      <h2>貓族禮盒</h2>
+      <div class="row">
+        <div class="flow-text col s3">價格 <?!= price[2]; ?></div>  
+        <div class="input-field col s6">
+          <select>
+            <?!= quantity; ?>
+          </select>
+          <label>數量</label>
+        </div>
+        <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>   
+      </div>     
+    </div> 
+ 
+  <!-- ----------------輸入折價券-------------- -->
+    <div class="container">
+      <hr>
+    <div class="row">      
+        <div class="input-field col s3">
+          <input id="coupon" type="text" class="validate">
+          <label for="coupon">coupon</label>           
+        </div>
+       <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>  
+    </div>
+    </div>
+    <div class="container">
+      <hr>
+<!-- ----------------費用計算-------------- -->
+    <h2> 費用計算 </h2>
+
+  <p id="calResult"> 123 <p>
+    
+
+<!-- ----------------訂購資料-------------- -->
+    <div class="container">
+      <hr>
+    <h2> 訂購資料 </h2>
+    <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="name" type="text" class="validate">
+          <label for="name">姓名</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="phone" type="number" class="validate">
+          <label for="phone">電話</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="adress" type="text" class="validate">
+          <label for="adress">地址</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
+    </form>
+    </div>
+      <a class="waves-effect waves-light btn-large"><i class="material-icons left">check</i>送出</a>
+  </div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <?!= include("index-js"); ?>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<script>
+  document.getElementById("coupon").addEventListener("input",couponCheck);
+  document.getElementById("btn_1").addEventListener("click",addGS);
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems);
+  });
+
+function addGS(){
+
+var info = {};
+info.name_1 = document.getElementById("name_1").innerText;
+info.pri_1 = document.getElementById("pri_1").innerText.replace("價格","");
+info.qun_1 = document.getElementById("qun_1").value;
+
+google.script.run.withSuccessHandler(showResult).calculate(info);
+
+}
+
+function showResult(result){
+document.getElementById('calResult').textContent = result;
+}
+
+function couponCheck(){
+  var coupon_number = document.getElementById("coupon").value;
+  google.script.run.withSuccessHandler(showIcon).couponcheck(coupon_number);
+}
+
+function showIcon(checkResult)){
+  document.getElementById('check_icon').textContent = "OK";
+}
+
+</script>
