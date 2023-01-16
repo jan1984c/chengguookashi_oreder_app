@@ -8,19 +8,54 @@
 
 </head>
 <body>
-  <div class="input-field col s12">
-    <select>
-      <option value="" disabled selected>Choose your option</option>
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
-    </select>
-    <label>Materialize Select</label>
-  </div>
-<select>
-  <option>1</option>
-</select>
-</div>
+
+   <!-- ----------------禮盒資料-------------- --> 
+    <!-- ----------------春櫻-------------- --> 
+
+    <div class="container">
+      <div id="name_1"><h2 >春櫻禮盒</h2></div>
+      <div class="row">
+        <div class="flow-text col s3" id="pri_1">價格 <?!= price[0]; ?></div>  
+          <div class="input-field col s6">
+            <select id="qun_1">
+              <?!= quantity; ?>
+            </select>
+            <label>數量</label>
+          </div>
+          <a class="btn-floating btn-large waves-effect waves-light red" id="btn_1"><i class="material-icons">add</i></a>   
+        </div>
+      </div> 
+    </div>
+   <!-- ----------------楓紅-------------- -->
+    <div class="container">
+      <h2>楓紅禮盒</h2>
+      <div class="row">
+        <div class="flow-text col s3">價格 <?!= price[1]; ?></div>  
+        <div class="input-field col s6">
+          <select>
+            <?!= quantity; ?>
+          </select>
+          <label>數量</label>
+        </div>
+        <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>   
+      </div>
+    </div> 
+<!-- ----------------貓族-------------- -->
+    <div class="container">
+      <h2>貓族禮盒</h2>
+      <div class="row">
+        <div class="flow-text col s3">價格 <?!= price[2]; ?></div>  
+        <div class="input-field col s6">
+          <select>
+            <?!= quantity; ?>
+          </select>
+          <label>數量</label>
+        </div>
+        <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>   
+      </div>     
+    </div> 
+
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <?!= include("index-js"); ?>  
 </body>
