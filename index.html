@@ -1,18 +1,63 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <base target="_top">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <?!= include("index-css"); ?>
-  </head>
+
+</head>
 <body>
 
+   <!-- ----------------禮盒資料-------------- --> 
+    <!-- ----------------春櫻-------------- --> 
 
+    <div class="container">
+      <div id="name_1"><h2 >春櫻禮盒</h2></div>
+      <div class="row">
+        <div class="flow-text col s3" id="pri_1">價格 <?!= price[0]; ?></div>  
+          <div class="input-field col s6">
+            <select id="qun_1">
+              <?!= quantity; ?>
+            </select>
+            <label>數量</label>
+          </div>
+          <a class="btn-floating btn-large waves-effect waves-light red" id="btn_1"><i class="material-icons">add</i></a>   
+        </div>
+      </div> 
+    </div>
+   <!-- ----------------楓紅-------------- -->
+    <div class="container">
+      <h2>楓紅禮盒</h2>
+      <div class="row">
+        <div class="flow-text col s3">價格 <?!= price[1]; ?></div>  
+        <div class="input-field col s6">
+          <select>
+            <?!= quantity; ?>
+          </select>
+          <label>數量</label>
+        </div>
+        <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>   
+      </div>
+    </div> 
+<!-- ----------------貓族-------------- -->
+    <div class="container">
+      <h2>貓族禮盒</h2>
+      <div class="row">
+        <div class="flow-text col s3">價格 <?!= price[2]; ?></div>  
+        <div class="input-field col s6">
+          <select>
+            <?!= quantity; ?>
+          </select>
+          <label>數量</label>
+        </div>
+        <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>   
+      </div>     
+    </div> 
 
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <?!= include("index-js"); ?>
+  <?!= include("index-js"); ?>  
 </body>
 </html>
   
