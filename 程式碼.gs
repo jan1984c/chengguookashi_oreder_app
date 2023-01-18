@@ -22,13 +22,14 @@ function couponcheck(coupon_number){
   var list = ws.getRange(2,1,ws.getRange("A2").getDataRegion().getLastRow() -1 ,ws.getRange("A1").getDataRegion().getLastColumn()).getValues();
     var couponlist = list.map(function(r){{return r[3]}});
     var activitylist = list.map(function(r){{return r[4]}});
+    coupon_number = Number(coupon_number);
 
     var check = couponlist.indexOf(coupon_number);
 
 if (check > -1){
   return "OK";
   } else {
-    return "fail";
+    return "Fail";
   }
 }
 

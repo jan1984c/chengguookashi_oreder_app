@@ -8,14 +8,19 @@ document.getElementById("coupon").addEventListener("input",couponCheck);
 
 function couponCheck(){
   var coupon_number = document.getElementById("coupon").value;
-  
-  if (coupon_number === 5){
-    result = google.script.run.withSuccessHandler(result).couponcheck(coupon_number);
+
+
+  if (coupon_number.length === 5){
+    google.script.run.withSuccessHandler(presenttest).couponcheck(coupon_number);
+
+  } else{
+    document.getElementById("test").innerHTML = "Ready";
+    M.updateTextFields();
   }
 }
 
-function presentcost(result){
-    document.getElementById("est").value = result;
+function presenttest(result){
+    document.getElementById("test").innerHTML = result;
     M.updateTextFields();
   }
 
