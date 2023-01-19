@@ -12,6 +12,7 @@ function doGet(){
 
   temp.quantity = qunOptioin;
   temp.price = pricelist;
+  temp.icon = "local_offer";
   
   return temp.evaluate();
 }

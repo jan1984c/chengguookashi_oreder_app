@@ -5,23 +5,53 @@
   });
 
 document.getElementById("coupon").addEventListener("input",couponCheck);
+  var done = document.getElementById("icon_done");
+  var error = document.getElementById("icon_error");
+  var loop = document.getElementById("icon_loop");
+  var local_offer = document.getElementById("icon_local_offer");
+
+  done.style.display = "none";
+  error.style.display = "none";
+  loop.style.display = "none";
 
 function couponCheck(){
   var coupon_number = document.getElementById("coupon").value;
 
+  local_offer.style.display = "none";
+  loop.style.display = "block";
 
   if (coupon_number.length === 5){
     google.script.run.withSuccessHandler(presenttest).couponcheck(coupon_number);
 
+  } else if (coupon_number.length === 0){
+      loop.style.display = "none";
+      local_offer.style.display = "block";
   } else{
     document.getElementById("test").innerHTML = "Ready";
     M.updateTextFields();
+      done.style.display = "none";
+      error.style.display = "none";
+      loop.style.display = "block";
+      local_offer.style.display = "none";
+
   }
 }
 
 function presenttest(result){
+
     document.getElementById("test").innerHTML = result;
     M.updateTextFields();
+
+    if (result === "OK"){
+        error.style.display = "none";
+        loop.style.display = "none";
+        done.style.display = "block";
+    } else{
+        done.style.display = "none";
+        loop.style.display = "none";
+        error.style.display = "block";
+    }
+
   }
 
   </script>
