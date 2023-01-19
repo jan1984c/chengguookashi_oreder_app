@@ -5,6 +5,10 @@
   });
 
 document.getElementById("coupon").addEventListener("input",couponCheck);
+document.getElementById("btn_1").addEventListener("click",addToCal);
+document.getElementById("btn_2").addEventListener("click",addToCal);
+document.getElementById("btn_3").addEventListener("click",addToCal);
+
   var done = document.getElementById("icon_done");
   var error = document.getElementById("icon_error");
   var loop = document.getElementById("icon_loop");
@@ -21,7 +25,7 @@ function couponCheck(){
   loop.style.display = "block";
 
   if (coupon_number.length === 5){
-    google.script.run.withSuccessHandler(presenttest).couponcheck(coupon_number);
+    google.script.run.withSuccessHandler(coupon_result).couponcheck(coupon_number);
 
   } else if (coupon_number.length === 0){
       loop.style.display = "none";
@@ -37,9 +41,9 @@ function couponCheck(){
   }
 }
 
-function presenttest(result){
+function coupon_result(result){
 
-    document.getElementById("test").innerHTML = result;
+    // document.getElementById("test").innerHTML = result;
     M.updateTextFields();
 
     if (result === "OK"){
@@ -53,5 +57,28 @@ function presenttest(result){
     }
 
   }
+
+function addToCal(){
+
+  var info = {};
+  info.name_1 = document.getElementById("name_1").innerText;
+  info.pri_1 = document.getElementById("pri_1").innerText.replace("價格","");
+  info.qun_1 = document.getElementById("qun_1").value;
+  
+  info.name_2 = document.getElementById("name_2").innerText;
+  info.pri_2 = document.getElementById("pri_2").innerText.replace("價格","");
+  info.qun_2 = document.getElementById("qun_2").value;
+
+  info.name_3 = document.getElementById("name_3").innerText;
+  info.pri_3 = document.getElementById("pri_3").innerText.replace("價格","");
+  info.qun_3 = document.getElementById("qun_3").value;
+
+  google.script.run.withSuccessHandler(showResult).calculate(info);
+
+}
+
+function showResult(result){
+  document.getElementById('calResult').textContent = result;
+}
 
   </script>

@@ -24,7 +24,6 @@ function couponcheck(coupon_number){
     var couponlist = list.map(function(r){{return r[3]}});
     var activitylist = list.map(function(r){{return r[4]}});
     coupon_number = Number(coupon_number);
-
     var check = couponlist.indexOf(coupon_number);
 
 if (check > -1){
@@ -32,6 +31,19 @@ if (check > -1){
   } else {
     return "Fail";
   }
+}
+
+function calculate(info){
+  var summary = info.pri_1*info.qun_1 + info.pri_2*info.qun_2 + info.pri_3*info.qun_3;
+  var box_num = info.qun_1 + info.qun_2 + info.qun_3;
+  if (box_num <3){
+    result = summary + 160; //兩盒裝運費
+  } else if (box_num <5 || box_num >=3) {
+    result = summary + 225; //四盒裝運費
+  } else {
+    result = summary + " 請連在Line 確認運費ˋ";
+  }
+  return result;
 }
 
 
