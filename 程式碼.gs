@@ -44,15 +44,27 @@ function calculate(info){
   var summary = info.pri_1*info.qun_1 + info.pri_2*info.qun_2 + info.pri_3*info.qun_3;
   // var summary = 1;
   var box_num = Number(info.qun_1) + Number(info.qun_2) + Number(info.qun_3);
-  // var box_num = 1;
-  couponcheck(coupon_check);
-  Logger.log(coupon_check);
-  Logger.log(discountlist);
-  Logger.log(discountlist[coupon_check]);
+  // var box_num = 2;
+  // var t1 = Number(info.coupon);
+  couponcheck(info.coupon);
+  
+  //折扣計算
   if (coupon_check > -1 ){
-    summary = summary + discountlist[coupon_check];
-  } 
-  Logger.log(summary);
+    if (discountlist[coupon_check] > 0){
+      summary = Number(summary*discountlist[coupon_check]);
+    } else {
+      summary = Number(summary + discountlist[coupon_check]*box_num);
+    }
+  } else {
+    if (box_num > 1 && box_num <3){
+        summary = Number(summary*0.95); //兩盒95折優惠
+    } else if (box_num > 3) {
+        summary = Number(summary*0.85); //四盒85折優惠
+      } else {
+        summary = summary;
+      }
+    } 
+  // 運費計算;
   if (box_num < 3 ){ 
     var result = summary + 160; //兩盒裝運費
     }  else if (box_num < 5){

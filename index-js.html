@@ -8,6 +8,7 @@ document.getElementById("coupon").addEventListener("input",couponCheck);
 document.getElementById("btn_1").addEventListener("click",addToCal);
 document.getElementById("btn_2").addEventListener("click",addToCal);
 document.getElementById("btn_3").addEventListener("click",addToCal);
+document.getElementById("btn_4").addEventListener("click",addToCal);
 
   var done = document.getElementById("icon_done");
   var error = document.getElementById("icon_error");
@@ -20,14 +21,15 @@ document.getElementById("btn_3").addEventListener("click",addToCal);
 
 function couponCheck(){
   var coupon_number = document.getElementById("coupon").value;
-
+  done.style.display = "none";
+  error.style.display = "none";
   local_offer.style.display = "none";
   loop.style.display = "block";
 
   if (coupon_number.length === 5){
     google.script.run.withSuccessHandler(coupon_result).couponcheck(coupon_number);
 
-  } else if (coupon_number.length === 0){
+  } else if (coupon_number.length === 0){  
       loop.style.display = "none";
       local_offer.style.display = "block";
   } else{
@@ -72,6 +74,8 @@ function addToCal(){
   info.name_3 = document.getElementById("name_3").innerText;
   info.pri_3 = document.getElementById("pri_3").innerText.replace("價格","");
   info.qun_3 = document.getElementById("qun_3").value;
+
+  info.coupon = document.getElementById("coupon").value;
 
   google.script.run.withSuccessHandler(showResult).calculate(info);
 
