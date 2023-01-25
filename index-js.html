@@ -19,6 +19,17 @@ document.getElementById("btn_4").addEventListener("click",addToCal);
   error.style.display = "none";
   loop.style.display = "none";
 
+  //pre-set box nmubers
+  var box1_num = 0;
+  var box2_num = 0;
+  var box3_num = 0;
+  var box1_name = "";
+  var box2_name = "";
+  var box3_name = "";
+  var box1_pri = 0;
+  var box2_pri = 0;
+  var box3_pri = 0;
+
 function couponCheck(){
   var coupon_number = document.getElementById("coupon").value;
   done.style.display = "none";
@@ -77,12 +88,50 @@ function addToCal(){
 
   info.coupon = document.getElementById("coupon").value;
 
+  box1_num = Number(info.qun_1);
+  box2_num = Number(info.qun_2);
+  box3_num = Number(info.qun_3);
+  box1_name = String(info.name_1);
+  box2_name = String(info.name_2);
+  box3_name = String(info.name_3);
+  box1_pri = Number(info.pri_1);
+  box2_pri = Number(info.pri_2);
+  box3_pri = Number(info.pri_3);
+
   google.script.run.withSuccessHandler(showResult).calculate(info);
 
 }
 
 function showResult(result){
-  document.getElementById('calResult').textContent = result;
+
+  var display_content = "under test";
+  var newline = "<br/>";
+  var box1_show = box1_name + "    " + box1_num + "盒    " + box1_num*box1_pri + "元" + newline;
+  var box2_show = box2_name + "    " + box2_num + "盒    " + box2_num*box2_pri + "元" + newline;
+  var box3_show = box3_name + "    " + box3_num + "盒    " + box3_num*box3_pri + "元" + newline;
+  var box_discount = result.activity + "    折扣    " + result.box_discout + newline;
+  var box_ship = "運費   " + result.ship + newline;
+  var box_amount =  "總金額  " + result.sum;
+  
+
+  if(box1_num === 0 ) {
+    box1_show = "";
+  }
+  if(box2_num === 0 ) {
+    box2_show = "";
+  }
+  if(box3_num === 0 ) {
+    box3_show = "";
+  }
+  if(box1_num === 0 && box2_num === 0 & box3_num === 0 ) {
+    box_discount = "";
+    box_ship = "";
+    box_amount = "";
+  }
+
+  display_content = box1_show + box2_show + box3_show + box_discount + box_ship +box_amount ;
+
+  document.getElementById('calResult').innerHTML = display_content;
 }
 
   </script>
