@@ -50,7 +50,7 @@ function calculate(info){
   // var box_num = 2;
   // var t1 = Number(info.coupon);
   couponcheck(info.coupon);
-  
+
   //折扣計算
   if (coupon_check > -1 ){
     result.discout = String(discountlist[coupon_check]);
