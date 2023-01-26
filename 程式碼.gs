@@ -89,6 +89,14 @@ function calculate(info){
 }
 
 
+function uploaddata(order_data){
+  var ss = SpreadsheetApp.openByUrl(url);
+  var ws = ss.getSheetByName("Test");
+  ws.appendRow([order_data.firstname,order_data.lastname, new Date()]);
+
+}
+
+
 function include(filename){
   return HtmlService.createHtmlOutputFromFile(filename).getContent();
 }

@@ -9,6 +9,7 @@ document.getElementById("btn_1").addEventListener("click",addToCal);
 document.getElementById("btn_2").addEventListener("click",addToCal);
 document.getElementById("btn_3").addEventListener("click",addToCal);
 document.getElementById("btn_4").addEventListener("click",addToCal);
+document.getElementById("upload").addEventListener("click",uploadData);
 
   var done = document.getElementById("icon_done");
   var error = document.getElementById("icon_error");
@@ -132,6 +133,19 @@ function showResult(result){
   display_content = box1_show + box2_show + box3_show + box_discount + box_ship +box_amount ;
 
   document.getElementById('calResult').innerHTML = display_content;
+}
+
+
+function uploadData(){
+  var order_data = {};
+  order_data.firstname = document.getElementById("fn").value;
+  order_data.lastname = document.getElementById("ln").value;
+
+  google.script.run.uploaddata(order_data);
+  
+  document.getElementById("fn").value = "";
+  document.getElementById("ln").value = "";
+  M.updateTextFields();
 }
 
   </script>
