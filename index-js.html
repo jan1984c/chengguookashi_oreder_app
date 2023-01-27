@@ -30,9 +30,13 @@ document.getElementById("upload").addEventListener("click",uploadData);
   var box1_pri = 0;
   var box2_pri = 0;
   var box3_pri = 0;
+  var box_sum = 0;
+
+  //pre-set coupon number
+  var coupon_number = 0;
 
 function couponCheck(){
-  var coupon_number = document.getElementById("coupon").value;
+  coupon_number = document.getElementById("coupon").value;
   done.style.display = "none";
   error.style.display = "none";
   local_offer.style.display = "none";
@@ -113,6 +117,8 @@ function showResult(result){
   var box_discount = result.activity + "    折扣    " + result.discout + newline;
   var box_ship = "運費   " + result.ship + newline;
   var box_amount =  "總金額  " + result.sum;
+
+  box_sum = result.sum;
   
 
   if(box1_num === 0 ) {
@@ -138,14 +144,38 @@ function showResult(result){
 
 function uploadData(){
   var order_data = {};
-  order_data.firstname = document.getElementById("fn").value;
-  order_data.lastname = document.getElementById("ln").value;
+  order_data.order_name = document.getElementById("order_name").value;
+  order_data.phone = document.getElementById("phone").value;
+  order_data.address = document.getElementById("address").value;
+  order_data.note = document.getElementById("note").value;
+  order_data.email = document.getElementById("email").value;
+  order_data.order_flower = box1_num;
+  order_data.order_maple = box2_num;
+  order_data.order_cat = box3_num;
+  order_data.order_num = box1_num + box2_num + box3_num;
+  order_data.order_sum = box_sum;
+  order_data.coupon_number = coupon_number;
 
   google.script.run.uploaddata(order_data);
   
-  document.getElementById("fn").value = "";
-  document.getElementById("ln").value = "";
+  //reset the columes
+  document.getElementById("order_name").value = "";
+  document.getElementById("phone").value = "";
+  document.getElementById("address").value = "";
+  document.getElementById("note").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("coupon").value = "";
+  document.getElementById('calResult').innerHTML = "";
   M.updateTextFields();
+  var qun_1 = document.getElementById("qun_1");
+  var qun_2 = document.getElementById("qun_2");
+  var qun_3 = document.getElementById("qun_3");
+  qun_1.selectedIndex = 0;
+  qun_2.selectedIndex = 0;
+  qun_3.selectedIndex = 0;
+  M.FormSelect.init(qun_1);
+  M.FormSelect.init(qun_2);
+  M.FormSelect.init(qun_3);
 }
 
   </script>
