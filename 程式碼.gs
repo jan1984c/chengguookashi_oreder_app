@@ -27,8 +27,12 @@ function doGet(){
   temp.quantity = qunOptioin;
   temp.price = pricelist;
   temp.icon = "local_offer";
+
+  var check = temp.evaluate();
+  var displayWeb = check.setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+
   
-  return temp.evaluate();
+  return displayWeb;
 }
 
 function couponcheck(coupon_number){
@@ -103,13 +107,13 @@ function calculate(info){
 
 function uploaddata(order_data){
   var ss = SpreadsheetApp.openByUrl(url);
-  var ws = ss.getSheetByName("Test");
+  var ws = ss.getSheetByName("Order");
   
   couponcheck(order_data.coupon_number);
 
-  var order_no = "";
+  var order_no = "Test";
   var order_source =coupon_source;
-  var order_name= order_data.order_name;;
+  var order_name= order_data.order_name;
   var order_note = order_data.note;
   var order_address = order_data.address;
   var order_phone = order_data.phone;
