@@ -156,7 +156,20 @@ function uploadData(){
   order_data.order_sum = box_sum;
   order_data.coupon_number = coupon_number;
 
-  google.script.run.uploaddata(order_data);
+
+  // check the input is valid
+  var check_ON = document.getElementById("order_name").checkValidity();
+  var check_P = document.getElementById("phone").checkValidity();
+  var check_A = document.getElementById("address").checkValidity();
+  var check_E = document.getElementById("email").checkValidity();
+
+   document.getElementById("test1").innerHTML = check_ON;
+  
+
+  if (!check_ON || !check_P || !check_A || !check_E ){
+    alert("fail");
+  } else {
+    google.script.run.uploaddata(order_data);
   
   //reset the columes
   document.getElementById("order_name").value = "";
@@ -176,6 +189,7 @@ function uploadData(){
   M.FormSelect.init(qun_1);
   M.FormSelect.init(qun_2);
   M.FormSelect.init(qun_3);
+  }
 }
 
   </script>

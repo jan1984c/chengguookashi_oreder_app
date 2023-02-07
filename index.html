@@ -23,6 +23,7 @@
             <label>數量</label>
           </div>
           <a class="btn-floating btn-large waves-effect waves-light red" id="btn_1"><i class="material-icons">add</i></a>   
+          <p id="test1">請選擇數量並加入計算</p>
         </div>
       </div> 
     </div>
@@ -81,31 +82,32 @@
     <div class="container">
       <hr>
       <!------------------------- 顯示計算結果 ---------------------------------------->
-      <h2>費用計算</h2>
+      <p><span style="font-size:35px;">費用計算</span></p>
       <p id="calResult"> <br><br><br><br>  <p>
       <hr>
   <!-- --------------------訂購資料填寫-------------------------------------------- -->
   <div class="container">
     <div class="row">
         <div class="input-field col s12">
-          <input id="order_name" type="text" class="validate">
+          <input id="order_name" type="text" class="validate" required>
           <label for="order_name">姓名</label>
         </div>
+        
     </div>
     <div class="row">
         <div class="input-field col s12">
-          <input id="phone" type="text" class="validate">
+          <input id="phone" type="text" class="validate" required>
           <label for="phone">電話</label>
     </div>
     <div class="row">
         <div class="input-field col s12">
-          <input id="address" type="text" class="validate">
+          <input id="address" type="text" class="validate" required>
           <label for="address">地址</label>
         </div>
     </div>
     <div class="row">
         <div class="input-field col s12">
-          <input id="email" type="text" class="validate">
+          <input id="email" type="text" class="validate" required>
           <label for="email">email</label>
         </div>
     </div>
