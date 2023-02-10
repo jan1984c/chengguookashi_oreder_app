@@ -162,12 +162,13 @@ function uploadData(){
   var check_P = document.getElementById("phone").checkValidity();
   var check_A = document.getElementById("address").checkValidity();
   var check_E = document.getElementById("email").checkValidity();
+  var check_BN = order_data.order_num;
 
-   document.getElementById("test1").innerHTML = check_ON;
+  //  document.getElementById("test1").innerHTML = check_BN;
   
 
-  if (!check_ON || !check_P || !check_A || !check_E ){
-    alert("fail");
+  if (!check_ON || !check_P || !check_A || !check_E || check_BN == 0){
+    alert("有欄位沒有填寫喔!");
   } else {
     google.script.run.uploaddata(order_data);
   
