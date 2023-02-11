@@ -163,12 +163,11 @@ function uploadData(){
   var check_A = document.getElementById("address").checkValidity();
   var check_E = document.getElementById("email").checkValidity();
   var check_BN = order_data.order_num;
-
-  //  document.getElementById("test1").innerHTML = check_BN;
   
-
   if (!check_ON || !check_P || !check_A || !check_E || check_BN == 0){
-    alert("有欄位沒有填寫喔!");
+    // alert("有欄位沒有填寫喔!");
+    document.getElementById("check").innerHTML = "有欄位沒有填寫或格式錯誤";
+    document.getElementById("check").style.color = "red";
   } else {
     google.script.run.uploaddata(order_data);
   
@@ -180,6 +179,7 @@ function uploadData(){
   document.getElementById("email").value = "";
   document.getElementById("coupon").value = "";
   document.getElementById('calResult').innerHTML = "";
+  document.getElementById("check").innerHTML = "";
   M.updateTextFields();
   var qun_1 = document.getElementById("qun_1");
   var qun_2 = document.getElementById("qun_2");

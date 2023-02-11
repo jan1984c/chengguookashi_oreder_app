@@ -23,7 +23,6 @@
             <label>數量</label>
           </div>
           <a class="btn-floating btn-large waves-effect waves-light red" id="btn_1"><i class="material-icons">add</i></a>   
-          <!-- <p id="test1">請選擇數量並加入計算</p> -->
         </div>
       </div> 
     </div>
@@ -96,7 +95,7 @@
     </div>
     <div class="row">
         <div class="input-field col s12">
-          <input id="phone" type="text" class="validate" required>
+          <input id="phone" type="tel" class="validate" required pattern="[0-9]{10}">
           <label for="phone">電話</label>
     </div>
     <div class="row">
@@ -107,7 +106,7 @@
     </div>
     <div class="row">
         <div class="input-field col s12">
-          <input id="email" type="text" class="validate" required>
+          <input id="email" type="email" class="validate" required>
           <label for="email">email</label>
         </div>
     </div>
@@ -118,6 +117,7 @@
     </div>
     <div>
       <button  id="upload" class="waves-effect waves-light btn pink lighten-3"><i class="material-icons left">arrow_forward</i>Run</button>
+    <p id="check"> </p>
     </div>
   </div>
 
