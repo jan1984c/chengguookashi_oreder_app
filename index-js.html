@@ -4,4 +4,201 @@
     var instances = M.FormSelect.init(elems);
   });
 
+document.getElementById("coupon").addEventListener("input",couponCheck);
+document.getElementById("btn_1").addEventListener("click",addToCal);
+document.getElementById("btn_2").addEventListener("click",addToCal);
+document.getElementById("btn_3").addEventListener("click",addToCal);
+document.getElementById("btn_4").addEventListener("click",addToCal);
+document.getElementById("upload").addEventListener("click",uploadData);
+
+  var done = document.getElementById("icon_done");
+  var error = document.getElementById("icon_error");
+  var loop = document.getElementById("icon_loop");
+  var local_offer = document.getElementById("icon_local_offer");
+
+  done.style.display = "none";
+  error.style.display = "none";
+  loop.style.display = "none";
+
+  //pre-set box nmubers
+  var box1_num = 0;
+  var box2_num = 0;
+  var box3_num = 0;
+  var box1_name = "";
+  var box2_name = "";
+  var box3_name = "";
+  var box1_pri = 0;
+  var box2_pri = 0;
+  var box3_pri = 0;
+  var box_sum = 0;
+
+  //pre-set coupon number
+  var coupon_number = 0;
+
+function couponCheck(){
+  coupon_number = document.getElementById("coupon").value;
+  done.style.display = "none";
+  error.style.display = "none";
+  local_offer.style.display = "none";
+  loop.style.display = "block";
+
+  if (coupon_number.length === 5){
+    google.script.run.withSuccessHandler(coupon_result).couponcheck(coupon_number);
+
+  } else if (coupon_number.length === 0){  
+      loop.style.display = "none";
+      local_offer.style.display = "block";
+  } else{
+    document.getElementById("test").innerHTML = "Ready";
+    M.updateTextFields();
+      done.style.display = "none";
+      error.style.display = "none";
+      loop.style.display = "block";
+      local_offer.style.display = "none";
+
+  }
+}
+
+function coupon_result(result){
+
+    // document.getElementById("test").innerHTML = result;
+    M.updateTextFields();
+
+    if (result === "OK"){
+        error.style.display = "none";
+        loop.style.display = "none";
+        done.style.display = "block";
+    } else{
+        done.style.display = "none";
+        loop.style.display = "none";
+        error.style.display = "block";
+    }
+
+  }
+
+function addToCal(){
+
+  var info = {};
+  info.name_1 = document.getElementById("name_1").innerText;
+  info.pri_1 = document.getElementById("pri_1").innerText.replace("價格","");
+  info.qun_1 = document.getElementById("qun_1").value;
+  
+  info.name_2 = document.getElementById("name_2").innerText;
+  info.pri_2 = document.getElementById("pri_2").innerText.replace("價格","");
+  info.qun_2 = document.getElementById("qun_2").value;
+
+  info.name_3 = document.getElementById("name_3").innerText;
+  info.pri_3 = document.getElementById("pri_3").innerText.replace("價格","");
+  info.qun_3 = document.getElementById("qun_3").value;
+
+  info.coupon = document.getElementById("coupon").value;
+
+  box1_num = Number(info.qun_1);
+  box2_num = Number(info.qun_2);
+  box3_num = Number(info.qun_3);
+  box1_name = String(info.name_1);
+  box2_name = String(info.name_2);
+  box3_name = String(info.name_3);
+  box1_pri = Number(info.pri_1);
+  box2_pri = Number(info.pri_2);
+  box3_pri = Number(info.pri_3);
+
+  google.script.run.withSuccessHandler(showResult).calculate_1(info);
+
+}
+
+function showResult(result){
+
+  var display_content = "under test";
+  var newline = "<br/>";
+  var box1_show = box1_name + "    " + box1_num + "盒    " + box1_num*box1_pri + "元   " + result.activity_flower + "  =>" + result.flower_pri +newline;
+  var box2_show = box2_name + "    " + box2_num + "盒    " + box2_num*box2_pri + "元" + newline;
+  var box3_show = box3_name + "    " + box3_num + "盒    " + box3_num*box3_pri + "元" + newline;
+  var box_discount = result.activity + "    折扣    " + result.discout + newline;
+  var box_ship = "運費   " + result.ship + newline;
+  var box_amount =  "總金額  " + result.sum;
+
+  box_sum = result.sum;
+  
+
+  if(box1_num === 0 ) {
+    box1_show = "";
+  }
+  if(box2_num === 0 ) {
+    box2_show = "";
+  }
+  if(box3_num === 0 ) {
+    box3_show = "";
+  }
+  if(box1_num === 0 && box2_num === 0 & box3_num === 0 ) {
+    box_discount = "";
+    box_ship = "";
+    box_amount = "";
+  }
+
+  display_content = box1_show + box2_show + box3_show + box_discount + box_ship +box_amount ;
+
+  document.getElementById('calResult').innerHTML = display_content;
+}
+
+
+function uploadData(){
+  var order_data = {};
+  order_data.order_name = document.getElementById("order_name").value;
+  order_data.phone = document.getElementById("phone").value;
+  order_data.address = document.getElementById("address").value;
+  order_data.note = document.getElementById("note").value;
+  order_data.email = document.getElementById("email").value;
+  order_data.order_flower = box1_num;
+  order_data.order_maple = box2_num;
+  order_data.order_cat = box3_num;
+  order_data.order_num = box1_num + box2_num + box3_num;
+  order_data.order_sum = box_sum;
+  order_data.coupon_number = coupon_number;
+
+
+  // check the input is valid
+  var check_ON = document.getElementById("order_name").checkValidity();
+  var check_P = document.getElementById("phone").checkValidity();
+  var check_A = document.getElementById("address").checkValidity();
+  var check_E = document.getElementById("email").checkValidity();
+  var check_BN = order_data.order_num;
+  
+  if (!check_ON || !check_P || !check_A || !check_E || check_BN == 0){
+    // alert("有欄位沒有填寫喔!");
+    document.getElementById("check").innerHTML = "有欄位沒有填寫或格式錯誤";
+    document.getElementById("check").style.color = "red";
+  } else {
+    google.script.run.uploaddata(order_data);
+
+  //reset the columes
+  document.getElementById("order_name").value = "";
+  document.getElementById("phone").value = "";
+  document.getElementById("address").value = "";
+  document.getElementById("note").value = "";
+  document.getElementById("email").value = "";
+  document.getElementById("coupon").value = "";
+  document.getElementById('calResult').innerHTML = "";
+  document.getElementById("check").innerHTML = "";
+  M.updateTextFields();
+  var qun_1 = document.getElementById("qun_1");
+  var qun_2 = document.getElementById("qun_2");
+  var qun_3 = document.getElementById("qun_3");
+  qun_1.value = "";
+  qun_2.value = "";
+  qun_3.value =" ";
+  // qun_1.selectedIndex = 0;
+  // qun_2.selectedIndex = 0;
+  // qun_3.selectedIndex = 0;
+  // M.FormSelect.init(qun_1);
+  // M.FormSelect.init(qun_2);
+  // M.FormSelect.init(qun_3);
+    document.getElementById("check").innerHTML = "訂單成功送出";
+    document.getElementById("check").style.color = "green";
+    
+
+  }
+}
+
+
   </script>

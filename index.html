@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+
 
 </head>
 <body>
@@ -13,51 +15,136 @@
     <!-- ----------------春櫻-------------- --> 
 
     <div class="container">
-      <div id="name_1"><h2 >春櫻禮盒</h2></div>
+      <div id="name_1"><span style="font-size:35px;">春櫻禮盒</span></div>
       <div class="row">
         <div class="flow-text col s3" id="pri_1">價格 <?!= price[0]; ?></div>  
-          <div class="input-field col s6">
+          <!-- <div class="input-field col s6">
             <select id="qun_1">
               <?!= quantity; ?>
             </select>
             <label>數量</label>
-          </div>
-          <a class="btn-floating btn-large waves-effect waves-light red" id="btn_1"><i class="material-icons">add</i></a>   
+          </div> -->
+        <div class="input-field col s3">
+          <input id="qun_1" type="number"  required pattern="[0-9]{2}">
+          <label for="qun_1">數量</label>
         </div>
+          加入計算 
+          <a class="btn-floating btn-large waves-effect waves-light red" id="btn_1"><i class="material-icons">add</i></a> 
+        </div>
+
       </div> 
     </div>
    <!-- ----------------楓紅-------------- -->
     <div class="container">
-      <h2>楓紅禮盒</h2>
+      <div id="name_2"><span style="font-size:35px;">楓紅禮盒</span></div>
       <div class="row">
-        <div class="flow-text col s3">價格 <?!= price[1]; ?></div>  
-        <div class="input-field col s6">
-          <select>
+        <div class="flow-text col s3" id="pri_2">價格 <?!= price[1]; ?></div>  
+        <!-- <div class="input-field col s6">
+          <select id="qun_2">
             <?!= quantity; ?>
           </select>
           <label>數量</label>
-        </div>
-        <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>   
+        </div> -->
+        <div class="input-field col s3">
+          <input id="qun_2" type="number" required pattern="[0-9]{2}">
+          <label for="qun_2">數量</label>
+        </div>        
+        
+        加入計算 
+        <a class="btn-floating btn-large waves-effect waves-light red" id="btn_2"><i class="material-icons">add</i></a>   
       </div>
     </div> 
 <!-- ----------------貓族-------------- -->
     <div class="container">
-      <h2>貓族禮盒</h2>
+      <div id="name_3"><span style="font-size:35px;">貓族禮盒</span></div>
       <div class="row">
-        <div class="flow-text col s3">價格 <?!= price[2]; ?></div>  
-        <div class="input-field col s6">
-          <select>
+        <div class="flow-text col s3" id="pri_3">價格 <?!= price[2]; ?></div>  
+        <!-- <div class="input-field col s6">
+          <select id="qun_3">
             <?!= quantity; ?>
           </select>
           <label>數量</label>
-        </div>
-        <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>   
+        </div> -->
+        <div class="input-field col s3">
+          <input id="qun_3" type="number" required pattern="[0-9]{2}">
+          <label for="qun_3">數量</label>
+        </div>         
+        加入計算 
+        <a class="btn-floating btn-large waves-effect waves-light red" id="btn_3"><i class="material-icons">add</i></a>   
       </div>     
     </div> 
+ <!-- ----------------輸入折價券-------------- -->
+    <div class="container">
+      <hr>
+    <div class="row">      
+        <div class="input-field col s3">
+          <input id="coupon" type="text" class="validate">
+          <label for="coupon">coupon</label>           
+        </div>
+      <div id="icon_done">
+        <i class="material-icons left">done</i>
+      </div>
+      <div id="icon_loop">
+        <i class="material-icons left">loop</i>
+      </div>
+      <div id="icon_error">
+        <i class="material-icons left">error</i>
+      </div>
+      <div id="icon_local_offer">
+        <i class="material-icons left">local_offer</i>
+      </div>
+      加入優惠券
+       <a class="btn-floating btn-large waves-effect waves-light red" id="btn_4"><i class="material-icons">add</i></a>  
+        <!-- <p id="test"> test </p> -->
+    </div>
+    </div>
+    <div class="container">
+      <hr>
+      <!------------------------- 顯示計算結果 ---------------------------------------->
+      <p><span style="font-size:35px;">費用計算</span></p>
+      <p id="calResult"> <br><br><br><br>  <p>
+      <hr>
+  <!-- --------------------訂購資料填寫-------------------------------------------- -->
+  <div class="container">
+    <div class="row">
+        <div class="input-field col s12">
+          <input id="order_name" type="text" class="validate" required>
+          <label for="order_name">姓名</label>
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+          <input id="phone" type="tel" class="validate" required pattern="[0-9]{10}">
+          <label for="phone">電話</label>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+          <input id="address" type="text" class="validate" required>
+          <label for="address">地址</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate" required>
+          <label for="email">email</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12">
+          <input id="note" type="text" class="validate">
+          <label for="note">備註</label>
+    </div>
+    <div>
+      <button  id="upload" class="waves-effect waves-light btn pink lighten-3"><i class="material-icons left">arrow_forward</i>上傳訂購單</button>
+    <p id="check"> </p>
+    </div>
+  </div>
 
-  
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <?!= include("index-js"); ?>  
 </body>
 </html>
+
   
