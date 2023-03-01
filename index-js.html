@@ -103,7 +103,7 @@ function addToCal(){
   box2_pri = Number(info.pri_2);
   box3_pri = Number(info.pri_3);
 
-  google.script.run.withSuccessHandler(showResult).calculate(info);
+  google.script.run.withSuccessHandler(showResult).calculate_1(info);
 
 }
 
@@ -111,7 +111,7 @@ function showResult(result){
 
   var display_content = "under test";
   var newline = "<br/>";
-  var box1_show = box1_name + "    " + box1_num + "盒    " + box1_num*box1_pri + "元" + newline;
+  var box1_show = box1_name + "    " + box1_num + "盒    " + box1_num*box1_pri + "元   " + result.activity_flower + "  =>" + result.flower_pri +newline;
   var box2_show = box2_name + "    " + box2_num + "盒    " + box2_num*box2_pri + "元" + newline;
   var box3_show = box3_name + "    " + box3_num + "盒    " + box3_num*box3_pri + "元" + newline;
   var box_discount = result.activity + "    折扣    " + result.discout + newline;
@@ -170,7 +170,7 @@ function uploadData(){
     document.getElementById("check").style.color = "red";
   } else {
     google.script.run.uploaddata(order_data);
-  
+
   //reset the columes
   document.getElementById("order_name").value = "";
   document.getElementById("phone").value = "";
@@ -184,13 +184,21 @@ function uploadData(){
   var qun_1 = document.getElementById("qun_1");
   var qun_2 = document.getElementById("qun_2");
   var qun_3 = document.getElementById("qun_3");
-  qun_1.selectedIndex = 0;
-  qun_2.selectedIndex = 0;
-  qun_3.selectedIndex = 0;
-  M.FormSelect.init(qun_1);
-  M.FormSelect.init(qun_2);
-  M.FormSelect.init(qun_3);
+  qun_1.value = "";
+  qun_2.value = "";
+  qun_3.value =" ";
+  // qun_1.selectedIndex = 0;
+  // qun_2.selectedIndex = 0;
+  // qun_3.selectedIndex = 0;
+  // M.FormSelect.init(qun_1);
+  // M.FormSelect.init(qun_2);
+  // M.FormSelect.init(qun_3);
+    document.getElementById("check").innerHTML = "訂單成功送出";
+    document.getElementById("check").style.color = "green";
+    
+
   }
 }
+
 
   </script>

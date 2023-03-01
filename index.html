@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+
 
 </head>
 <body>
@@ -16,14 +18,20 @@
       <div id="name_1"><span style="font-size:35px;">春櫻禮盒</span></div>
       <div class="row">
         <div class="flow-text col s3" id="pri_1">價格 <?!= price[0]; ?></div>  
-          <div class="input-field col s6">
+          <!-- <div class="input-field col s6">
             <select id="qun_1">
               <?!= quantity; ?>
             </select>
             <label>數量</label>
-          </div>
-          <a class="btn-floating btn-large waves-effect waves-light red" id="btn_1"><i class="material-icons">add</i></a>   
+          </div> -->
+        <div class="input-field col s3">
+          <input id="qun_1" type="number"  required pattern="[0-9]{2}">
+          <label for="qun_1">數量</label>
         </div>
+          加入計算 
+          <a class="btn-floating btn-large waves-effect waves-light red" id="btn_1"><i class="material-icons">add</i></a> 
+        </div>
+
       </div> 
     </div>
    <!-- ----------------楓紅-------------- -->
@@ -31,12 +39,18 @@
       <div id="name_2"><span style="font-size:35px;">楓紅禮盒</span></div>
       <div class="row">
         <div class="flow-text col s3" id="pri_2">價格 <?!= price[1]; ?></div>  
-        <div class="input-field col s6">
+        <!-- <div class="input-field col s6">
           <select id="qun_2">
             <?!= quantity; ?>
           </select>
           <label>數量</label>
-        </div>
+        </div> -->
+        <div class="input-field col s3">
+          <input id="qun_2" type="number" required pattern="[0-9]{2}">
+          <label for="qun_2">數量</label>
+        </div>        
+        
+        加入計算 
         <a class="btn-floating btn-large waves-effect waves-light red" id="btn_2"><i class="material-icons">add</i></a>   
       </div>
     </div> 
@@ -45,12 +59,17 @@
       <div id="name_3"><span style="font-size:35px;">貓族禮盒</span></div>
       <div class="row">
         <div class="flow-text col s3" id="pri_3">價格 <?!= price[2]; ?></div>  
-        <div class="input-field col s6">
+        <!-- <div class="input-field col s6">
           <select id="qun_3">
             <?!= quantity; ?>
           </select>
           <label>數量</label>
-        </div>
+        </div> -->
+        <div class="input-field col s3">
+          <input id="qun_3" type="number" required pattern="[0-9]{2}">
+          <label for="qun_3">數量</label>
+        </div>         
+        加入計算 
         <a class="btn-floating btn-large waves-effect waves-light red" id="btn_3"><i class="material-icons">add</i></a>   
       </div>     
     </div> 
@@ -74,6 +93,7 @@
       <div id="icon_local_offer">
         <i class="material-icons left">local_offer</i>
       </div>
+      加入優惠券
        <a class="btn-floating btn-large waves-effect waves-light red" id="btn_4"><i class="material-icons">add</i></a>  
         <!-- <p id="test"> test </p> -->
     </div>
@@ -116,7 +136,7 @@
           <label for="note">備註</label>
     </div>
     <div>
-      <button  id="upload" class="waves-effect waves-light btn pink lighten-3"><i class="material-icons left">arrow_forward</i>Run</button>
+      <button  id="upload" class="waves-effect waves-light btn pink lighten-3"><i class="material-icons left">arrow_forward</i>上傳訂購單</button>
     <p id="check"> </p>
     </div>
   </div>

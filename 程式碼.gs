@@ -55,6 +55,70 @@ if (coupon_check > -1){
   }
 }
 
+function calculate_1(info){
+  var ss = SpreadsheetApp.openByUrl(url);
+  var ws = ss.getSheetByName("Activity");
+  var list = ws.getRange(3,1,ws.getRange("A2").getDataRegion().getLastRow() -1 ,ws.getRange("A1").getDataRegion().getLastColumn()).getValues();
+
+  var flower_pri = 0;
+  var result = {};
+  var box_num = Number(info.qun_2) + Number(info.qun_3);
+  var summary = info.pri_2*info.qun_2 + info.pri_3*info.qun_3;
+  order_num = box_num;
+
+  //春櫻禮盒優惠
+
+  //計算春櫻禮盒內容
+    if (info.qun_1 > 0) {
+      result.activity_flower = "春櫻禮盒優惠";
+    }
+    if (info.qun_1 == 1){
+      flower_pri = info.qun_1*info.pri_1*list[1][2];
+    }
+    if (info.qun_1 == 2){
+      flower_pri = info.qun_1*info.pri_1*list[1][3];
+    }
+    if (info.qun_1 ==3) {
+      flower_pri = info.qun_1*info.pri_1*list[1][4];
+    }
+    if (info.qun_1 > 3) {
+      flower_pri = info.qun_1*info.pri_1*list[1][5];
+      }
+    result.flower_pri = flower_pri;
+  //計算其他禮盒內容
+        result.activity = "標準折扣";
+    if (box_num > 1 && box_num <3){
+        summary = Number(summary*0.95); //兩盒95折優惠
+        result.discout = "0.95";
+    } else if (box_num > 3) {
+        summary = Number(summary*0.85); //四盒85折優惠
+        result.discout = "0.85";
+      } else {
+        summary = summary;
+        result.discout = "無優惠";
+      }
+
+  summary = Math.round(summary + flower_pri);
+  box_num = box_num + Number(info.qun_1);    
+
+    // 運費計算;
+  if (box_num < 3 ){ 
+    result.sum = summary + 160; //兩盒裝運費
+    result.ship = 160;
+    }  else if (box_num < 5){
+    result.sum = summary + 225; //四盒裝運費
+    result.ship = 225;
+  }
+  else {
+    result.ship = "待定";
+    result.sum = summary + " 請在Line上確認運費";
+  }
+  order_sum = result.sum;
+  return result;
+
+ 
+}
+
 function calculate(info){
 
   var result = {};
@@ -111,7 +175,7 @@ function uploaddata(order_data){
   
   couponcheck(order_data.coupon_number);
 
-  var order_no = "Test";
+  var order_no = "New";
   var order_source =coupon_source;
   var order_name= order_data.order_name;
   var order_note = order_data.note;
@@ -124,6 +188,31 @@ function uploaddata(order_data){
   var order_num = order_data.order_num;
   var order_sum = order_data.order_sum;
   ws.appendRow([order_no, new Date(), order_source, order_name, order_flower, order_maple, order_cat, order_num, "", order_sum, "", "",  order_note, order_name, order_address, order_phone, order_email, ""]);
+
+  // send an email
+  var subject = "有人在誠菓手作網站送出訂單喔!";
+  var body = "we'll get back to you";
+  var htmlTemplate = HtmlService.createTemplateFromFile("email");
+  var flower_gift = "";
+  var maple_gift = "";
+  var cat_gift = "";
+
+  if (order_flower > 0) {
+    flower_gift = "春櫻禮盒" + "*" + order_flower;
+  }
+  if (order_maple > 0) {
+    maple_gift = "楓紅禮盒" + "*" + order_maple;
+  }
+  if (order_cat > 0) {
+    cat_gift = "貓族禮盒" + "*" + order_cat;
+  }
+
+  htmlTemplate.name = order_name;
+  htmlTemplate.flower = flower_gift;
+  htmlTemplate.maple = maple_gift;
+  htmlTemplate.cat = cat_gift;  
+  var htmlBody = htmlTemplate.evaluate().getContent();
+  GmailApp.sendEmail("Geogia10323@gmail.com  ", subject, body, {htmlBody: htmlBody});
 }
 
 
